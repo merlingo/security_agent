@@ -1,0 +1,85 @@
+{
+  "rules": [
+    {
+      "id": "RULE-001",
+      "name": "Yüksek CPU Kullanımı",
+      "description": "Bir süreç yüksek CPU kullanımı gösteriyor",
+      "severity": "MEDIUM",
+      "type": "PROCESS",
+      "conditions": {
+        "cpu_usage": "> 90"
+      },
+      "actions": ["LOG", "ALERT"]
+    },
+    {
+      "id": "RULE-002",
+      "name": "Yüksek Bellek Kullanımı",
+      "description": "Bir süreç yüksek bellek kullanımı gösteriyor",
+      "severity": "MEDIUM",
+      "type": "PROCESS",
+      "conditions": {
+        "memory_usage": "> 90"
+      },
+      "actions": ["LOG", "ALERT"]
+    },
+    {
+      "id": "RULE-003",
+      "name": "Şüpheli Süreç",
+      "description": "Bilinen şüpheli bir süreç tespit edildi",
+      "severity": "HIGH",
+      "type": "PROCESS",
+      "conditions": {
+        "is_suspicious": "true"
+      },
+      "actions": ["LOG", "ALERT", "BLOCK"]
+    },
+    {
+      "id": "RULE-004",
+      "name": "Şüpheli Ağ Bağlantısı",
+      "description": "Şüpheli bir ağ bağlantısı tespit edildi",
+      "severity": "HIGH",
+      "type": "NETWORK",
+      "conditions": {
+        "port": "IN [22, 3389]",
+        "direction": "OUTBOUND"
+      },
+      "actions": ["LOG", "ALERT"]
+    },
+    {
+      "id": "RULE-005",
+      "name": "Kritik Dosya Değişikliği",
+      "description": "Kritik bir sistem dosyasında değişiklik tespit edildi",
+      "severity": "CRITICAL",
+      "type": "FILE",
+      "conditions": {
+        "path": "STARTS_WITH /etc/",
+        "event_type": "IN [MODIFIED, DELETED]"
+      },
+      "actions": ["LOG", "ALERT", "BLOCK"]
+    },
+    {
+      "id": "RULE-006",
+      "name": "Şüpheli Uzantılı Dosya",
+      "description": "Şüpheli uzantılı bir dosya tespit edildi",
+      "severity": "HIGH",
+      "type": "FILE",
+      "conditions": {
+        "extension": "IN [.exe, .dll, .bat, .cmd, .ps1, .vbs]"
+      },
+      "actions": ["LOG", "ALERT", "QUARANTINE"]
+    },
+    {
+      "id": "RULE-007",
+      "name": "Kimlik Doğrulama Hatası",
+      "description": "Çoklu kimlik doğrulama hatası tespit edildi",
+      "severity": "HIGH",
+      "type": "SYSLOG",
+      "conditions": {
+        "pattern": "CONTAINS authentication failure",
+        "count": "> 5",
+        "timeframe": "5m"
+      },
+      "actions": ["LOG", "ALERT"]
+    }
+  ]
+} 

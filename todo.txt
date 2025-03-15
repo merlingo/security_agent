@@ -1,0 +1,28 @@
+
+C++ Agent With Cursor:
+Yaml dosyasından config bilgileri alır. Config dosyasında tüm bilgiler yer almaktadır.
+Her modül config dosyası ile yüklenir. Ana config dosyasından modüllerin bilgileri çekilir. Modüller:
+    Monitoring
+        Endpoint’den toplanacak veriler, servis tipleri
+    Logging
+        Ne tir bilgiler loglanır
+    Detection
+        Yapay zeka ile tespit logları
+    Response
+        Tehdit tespitinde, event geldiğinde ya da merkezden işaret geldiğinde; quarantine, dosya silme, dosyayı merkeze incelemeye gönderme, işlem(process) durdurma, bilgisayarı kapatma, 
+    Behavior
+        Sigma
+        Yara
+        Snort
+        ML models
+    Event_Management
+        Event oluşturma ya da event dinleme
+    Routing
+        Veri gönderme, veri alma
+
+Modularity'nin 2 seviyesi vardır: 
+    Seviye 2: uygulama build etme:
+        Uygulamada kullanılacak modüllerin, aralarındaki ilişki kullanım yöntemleri vb. değerler tanımlanarak uygulama build edilir.
+    Seviye 1: Modül build etme:
+        Uygulama zaten vardır. Modüllere ait değerler config dosyası ile oluşturulur.
+

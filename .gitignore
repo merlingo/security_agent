@@ -1,0 +1,92 @@
+# Derleme çıktıları
+build/
+bin/
+lib/
+out/
+cmake-build-*/
+
+# Derleyici önbelleği
+.cache/
+compile_commands.json
+
+# IDE dosyaları
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Bağımlılıklar
+vendor/
+external/
+
+# Derlenmiş nesneler
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+*.exe
+*.out
+*.app
+
+# CMake dosyaları
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+CTestTestfile.cmake
+_deps/
+
+# Log dosyaları
+logs/
+*.log
+
+# Yapılandırma dosyaları (geliştirme sırasında)
+# config.yaml
+
+# Geçici dosyalar
+tmp/
+temp/
+
+# Kod kapsamı raporları
+*.gcno
+*.gcda
+*.gcov
+coverage/
+
+# Profil dosyaları
+gmon.out
+callgrind.out.*
+perf.data*
+
+# Özel dosyalar
+.env
+credentials.json
+
+# Büyük dosyalar
+libsecurity_agent_lib.a
+
+# Diğer büyük dosyalar
+*.dSYM/
+*.su
+*.idb
+*.pdb
+*.ilk
+*.map
+*.exp
+*.dmp
+*.stackdump
+*.core
+
+# Özel büyük dosyalar
+security_agent_test
+logging_module_test
+routing_module_test
+syslog_monitoring_test 

@@ -1,0 +1,29 @@
+{
+  "suspicious_processes": [
+    {
+      "name": "netcat",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "description": "Ağ bağlantıları için kullanılan potansiyel tehlikeli araç"
+    },
+    {
+      "name": "nmap",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "description": "Ağ tarama aracı"
+    },
+    {
+      "name": "wireshark",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "description": "Ağ trafiği izleme aracı"
+    },
+    {
+      "name": "metasploit",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "description": "Güvenlik açığı sömürme çerçevesi"
+    },
+    {
+      "name": "mimikatz",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "description": "Kimlik bilgilerini çıkaran araç"
+    }
+  ]
+} 

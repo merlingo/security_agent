@@ -1,0 +1,128 @@
+logging_module:
+  log_level: INFO
+  log_file: logs/security_agent.log
+  max_log_size: 10485760  # 10 MB
+  max_log_files: 5
+  console_logging: true
+  file_logging: true
+
+routing_module:
+  enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    exchange: security_events
+    queue: security_events_queue
+    routing_key: security.event
+
+monitoring_module:
+  enabled: true
+  
+  syslog_monitoring:
+    enabled: true
+    syslog_path: /var/log/system.log
+    scan_interval: 5000  # 5 saniye
+    patterns:
+      - pattern: "authentication failure"
+        severity: WARNING
+        description: "Kimlik doğrulama hatası"
+      - pattern: "Failed password"
+        severity: WARNING
+        description: "Başarısız parola girişimi"
+      - pattern: "Invalid user"
+        severity: WARNING
+        description: "Geçersiz kullanıcı"
+  
+  network_monitoring:
+    enabled: true
+    scan_interval: 10000  # 10 saniye
+    connection_history_size: 1000
+    suspicious_ports:
+      - port: 22
+        protocol: TCP
+        description: "SSH bağlantısı"
+      - port: 3389
+        protocol: TCP
+        description: "RDP bağlantısı"
+    excluded_addresses:
+      - 127.0.0.1
+      - ::1
+    bandwidth_threshold: 10485760  # 10 MB/s
+  
+  process_monitoring:
+    enabled: true
+    scan_interval: 5000  # 5 saniye
+    process_history_size: 1000
+    suspicious_processes_file: config/suspicious_processes.json
+    excluded_processes:
+      - /usr/sbin/sshd
+      - /usr/bin/ssh
+    cpu_threshold: 90.0
+    memory_threshold: 90.0
+    network_threshold: 10485760  # 10 MB/s
+    disk_threshold: 52428800  # 50 MB/s
+  
+  file_monitoring:
+    enabled: true
+    scan_interval: 10000  # 10 saniye
+    monitored_directories:
+      - path: /etc
+        recursive: true
+        extensions:
+          - .conf
+          - .yaml
+          - .json
+      - path: /var/log
+        recursive: false
+        extensions:
+          - .log
+    monitored_files:
+      - /etc/passwd
+      - /etc/shadow
+      - /etc/hosts
+    excluded_directories:
+      - /var/log/journal
+      - /var/log/cups
+    excluded_files:
+      - /var/log/lastlog
+    cache_size: 1000
+    suspicious_extensions:
+      - .exe
+      - .dll
+      - .bat
+      - .cmd
+      - .ps1
+      - .vbs
+      - .js
+      - .jar
+      - .sh
+    max_file_size: 10485760  # 10 MB
+
+detection_module:
+  enabled: true
+  rules_file: config/detection_rules.json
+  alert_threshold: 3
+  alert_interval: 300  # 5 dakika
+  max_alerts_per_interval: 10
+
+response_module:
+  enabled: true
+  log_level: INFO
+  quarantine_folder: /tmp/quarantine
+  rabbitmq:
+    host: localhost
+    port: 5672
+    queue: response_queue
+  actions:
+    kill_process: true
+    quarantine: true
+    erase_file: true
+    transfer_file: true
+    reboot: false
+  alert_recipients:
+    - email: admin@example.com
+    - webhook: https://example.com/security/webhook
+  max_response_actions: 5
+  response_timeout: 10000  # 10 saniye 
